@@ -1,0 +1,484 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif, 'Domaine Display', Georgia, Cambria, 'Times New Roman', Times, serif;
+    background-color: #f4f4f4;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(3, 1fr);
+    flex-wrap: wrap;
+    align-content: center; ;
+    justify-content: center;
+    gap: 3em;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.header {
+    background-color: transparent;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 100%;
+    height: 45%;
+    color: #fb7d07;
+    border-radius: 10px;
+    
+}
+
+.backgroundvideo1{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 125%;    
+    z-index: -100;
+    object-fit: cover;
+    margin-bottom: 150px;
+}
+
+
+nav{
+    background-color: transparent;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 100%;
+    height: 45%;
+    color: #fb7d07;
+    border-radius: 10px;
+}
+
+nav ul {
+    list-style-type:none;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+}
+nav ul li {
+    display: inline;
+    
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fb7d07;
+    padding: 15px;
+    display: inline-block;
+    text-align: center;
+    font-size: x-large;
+    text-decoration: underline;
+    
+
+    
+}
+
+nav ul li a:hover {
+    background-color: burlywood;
+    color: green;
+    border-radius: 10px;
+}
+.contact{
+    background-color: transparent;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 100%;
+    height: 45%;
+    color: #fb7d07;
+    border-radius: 10px;
+}
+.contact:hover{
+    background-color: burlywood;
+    color: green;
+    border-radius: 10px;
+}
+
+@media (max-width: 500px) {
+  nav ul li a {
+    float: none;
+    display: inline-flex;
+    width: auto;
+    text-align: left;
+    font-size: 1em;
+    border: solid 1px #fb7d07;
+    border-radius: 10px;
+    
+  }
+}
+.main{
+    margin-top: auto;
+    height: 100%;
+    text-align: center;
+    background-color: #e6e6e6;
+    color: rgb(107,0,62);
+    border-radius: 10px;
+   
+}
+
+/*from here start stories and footer part*/
+.stories{
+    margin-top: auto;
+    background-color: #e6e6e6;
+    color: rgb(107,0,62);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+     
+}
+
+.story {
+    border-radius: 10px;
+    margin: 10px;
+    color: rgb(107,0,62);
+    width: auto;
+    border: black dotted  2px;
+}
+
+.appetizer{
+    background-size: cover;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(107,0,62);
+    display: flex;
+    margin: 10px;
+    align-items: center;
+
+  
+}
+.img_appetizer{
+    float: left;
+    border-radius: 10px;
+    width: 40%;
+    height: 60%;
+    object-fit: cover;
+}
+.appetizer_text{
+    float: right;
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(107,0,62);
+    display: table-column;
+    margin: 10px;
+    
+}
+#our_text{
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fb7d07;
+    font-size: 1.5vw;
+   
+    margin: 10px;
+}
+
+.main_course{   
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+     
+}
+
+/*appittizer html page */
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    color: rgb(107, 0, 62);
+}
+
+section h2 {
+    color: #fb7d07;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+section ul li {
+    margin: 10px 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+
+.recipes{
+    background-color: lightgray;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+    float: right;
+}
+@media (max-width: 700px) {
+  .recipes {
+    display: inline-grid;
+    font-size: 0.7em;
+    width: auto;
+    gap: 5px;
+    
+    
+  }
+}
+
+aside{
+    background-color: lightgray;
+    padding: 10px;
+    margin: 100px 10px 10px 10px;
+    text-align: center;
+    width: 20%;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+    float: left;
+    
+}
+@media (max-width: 700px) {
+  aside {
+    float: none;
+    display: inline-flex;
+    width: 10%;
+    text-align: left;
+    font-size: .9em;
+    gap: 5px;
+    
+  }
+}
+
+@media (max-width: 500px) {
+  aside {
+    float: none;
+    display: inline-flex;
+    width: 10%;
+    text-align: left;
+    font-size: .7em;
+    gap: 5px;
+    
+  }
+}
+
+.sidebar{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+
+.aside_items{
+    background-color: lightgray;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: auto;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+}
+
+.recipes_appetizers{
+    background-color: lightgray;
+    margin: 10px;
+    text-align: center;
+    width: auto;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+    float: right;
+}
+
+.inner_recipes_block{
+    background-color: lightgray;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: auto;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+    float: right;
+    
+}
+.inner_recipes_block h2 {
+    
+    text-align: center;
+    font-size: 2em;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: brown;
+    background-color: #FCFBF4;
+    border-radius: 10px;
+}
+.inner_recipes_block h3{
+    
+    text-align: center;
+    font-size: 2em;
+    margin: 10px;
+    background-color: #FCFBF4; 
+    border-radius: 10px;
+}
+.inner_recipes_block ul {
+    list-style-type: none;
+    padding: 0;
+}
+.inner_recipes_block ul li {
+    margin: 10px 0;
+    font-size: 1em;
+    text-align: center;
+}
+
+.inner_recipes_block_spilter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 3em;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+}
+.inner_recipes_block_spilt_1{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3em;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+    
+}
+.inner_recipes_block_spilt_2{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3em;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+}
+
+
+.dessets{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.contact_us {
+    background-color: transparent;
+    padding: 10px;
+    margin-top: 10vh;
+    width: 100%;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+    
+}
+
+.contact_us_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+
+}
+.contact_us_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+    
+    font-size: 1.4em;
+}
+.contact_us_content1{
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+    width: 70%;
+    height: 60%;
+    
+    font-size: 1.4em;
+}
+
+
+.contact_us form {
+    width: 78%;
+    min-height: 200px;
+    position: relative;
+    top:0%;
+    right:0%;
+    z-index:10;
+    resize: none;
+}
+.contact_us form input[type="text"], .contact_us form input[type="email"], .contact_us form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+#sumbit{
+    background-color: #fb7d07;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.contact_us .contact_info {
+    width: 48%;
+}
+
+.footer {
+    background-color: transparent;
+    padding: 10px;
+    margin: 10px 0 20px 10px;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    color: #fb7d07;
+}
