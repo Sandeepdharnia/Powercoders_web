@@ -52,6 +52,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+INSTALLED_APPS += ['corsheaders']
+MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
+CORS_ALLOW_ALL_ORIGINS = True
+
+
 ROOT_URLCONF = 'recipesapi.urls'
 
 TEMPLATES = [
@@ -132,3 +137,27 @@ REST_FRAMEWORK = {
        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5500',  # Frontend origin
+]
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5500',
+    #'http://127.0.0.1:5500/contact/your_recipe.html',
+    'http://127.0.0.1:8000',
+]
+
+
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
+CORS_ALLOW_CREDENTIALS = True 
