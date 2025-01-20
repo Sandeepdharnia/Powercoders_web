@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <script src="index.js" defer></script>
+
+    <title>Contact</title>
+</head>
+<body>
+    <div class="container">
+            <div class="header">
+                <div class="backgroundvideo1">
+                    <video autoplay muted loop >
+                        <source src="/assets/cooking_ready.mp4" type="video/mp4">
+                </div>
+                <h1 style="font-family: 'Domaine Display';">Delicious Recipes</h1>
+                <nav class="navbar">
+                    <ul>
+                       <li><a href="/index.html">Home</a></li>
+                        <li><a href="/appetizers/asian.html">Appetizers</a></li>
+                        <li><a href="/main_meals/main_meals.html">Main Courses</a></li>
+                        <li><a href="/desserts/desserts.html">Desserts</a></li>
+                        <li><a href="/contact/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+    </div>
+    <div class="add_recipe_container">
+        <div class="add_recipe">
+        <h3>Your Recipe</h3>
+        <p>Share your recipe with us and we  <br>
+        will add it to our collection of recipes.</p>
+        </div>
+    </div>
+    <div class="contact_us">
+        <div class="contact_us_container">
+
+            <div class="contact_us_content1">
+                <form id="recipeForm" class="contact_form" method="post">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Title.." required>
+
+                    <label for="ingredients">Ingredients</label>
+                    <textarea id="ingredients" name="ingredients" style="height: 100px;" placeholder="Ingredients.." required></textarea>
+
+                    <label for="prepare_process">Prepare Process</label>
+                    <textarea id="prepare_process" name="prepare_process" style="height: 100px;" placeholder="Preparation process.." required></textarea>
+
+                    <label for="serve">Serve</label>
+                    <textarea id="serve" name="serve" placeholder="Serve with.." required></textarea>
+
+                    <label for="writer">Writer</label>
+                    <input type="text" id="writer" name="writer" placeholder="Your name.." required>
+
+                    <label for="type">Type of Cuisine</label>
+                    <select id="type" name="type" required>
+                        <option value="asian">Asian</option>
+                        <option value="middle_east">Middle Eastern</option>
+                        <option value="european">European</option>
+                        <option value="african">African</option>
+                        <option value="north_american">North American</option>
+                        <option value="south_american">South American</option>
+                    </select>
+
+                    <button id="submit" type="submit">Submit</button>
+                </form>
+
+
+                <!-- <script>
+
+                    // JavaScript function to get CSRF token from cookies
+                        function getCSRFToken() {
+                            const cookies = document.cookie.split(';');
+                            for (const cookie of cookies) {
+                                const [name, value] = cookie.trim().split('=');
+                                if (name === 'csrftoken') {
+                                    console.log('CSRF token found:', value);
+                                    return decodeURIComponent(value);
+                                }
+                            }
+                            return null;
+                        }
+
+                        function getCookie(name) {
+                            let cookieValue = null;
+                            if (document.cookie && document.cookie !== "") {
+                            const cookies = document.cookie.split(";");
+                            for (let i = 0; i < cookies.length; i++) {
+                           const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === name + "=") {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                            }
+                            }
+                            return cookieValue;
+                            }
+
+
+
+
+
+                        // document.getElementById('recipeForm').addEventListener('submit', async function (e) {
+                        //     e.preventDefault();
+
+                        //     // Get form data
+                        //     const formData = new FormData(e.target);
+                        //     const data = Object.fromEntries(formData.entries()); // Convert to JSON-compatible object
+
+                        //     console.log('Data being sent:', data);
+
+                        //     // Send POST request to the API
+                        //     const response = await fetch('http://127.0.0.1:8000/api/v1/recipes/', {
+                        //         mode: 'cors',
+                        //         method: 'POST',
+                        //         headers: { 
+                        //         'Content-Type': 'application/json',
+                        //         'X-CSRFToken': getCSRFToken(),},
+                        //         body: JSON.stringify(data),
+                        //         credentials: "include",
+                        //     })
+                        //     .then(response => {
+                        //             if (response.ok) {
+                        //                 return response.json();
+                        //             } else {
+                        //                 throw new Error('Failed to submit recipe');
+                        //             }
+                        //         })
+                        //         .then(data => {
+                        //             console.log('Recipe submitted:', data);
+                        //         })
+                        //         .catch(error => {
+                        //             console.error(error);
+                        //         });
+                        // });
+
+
+                        async function submitRecipe(event) {
+                            event.preventDefault();
+
+                            const csrfToken = getCookie('csrftoken'); // Ensure CSRF token retrieval
+                            const data = {
+                                title: document.getElementById('title').value,
+                                ingredients: document.getElementById('ingredients').value,
+                                prepare_process: document.getElementById('prepare_process').value,
+                                serve: document.getElementById('serve').value,
+                                writer: document.getElementById('writer').value,
+                                type: document.getElementById('cuisine').value,
+                            };
+
+                            const response = await fetch('http://127.0.0.1:8000/api/v1/recipes/', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': csrfToken,
+                                },
+                                body: JSON.stringify(data),
+                                credentials: 'include',
+                            });
+
+                            if (response.ok) {
+                                console.log('Recipe submitted successfully');
+                            } else {
+                                console.error('Failed to submit recipe:', response.status, await response.text());
+                            }
+                        }
+                        document.getElementById('recipeForm').addEventListener('submit', submitRecipe);
+
+                </script> -->
+
+            </div>
+
+        </div>
+                
+        
+    </div>
+    <div class="footer">
+        <p>Delicious Recipes &copy; 2025</p>
+    </div>
+        
+</body>
+</html>

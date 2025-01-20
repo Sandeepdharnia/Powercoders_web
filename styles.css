@@ -473,6 +473,54 @@ aside{
     width: 48%;
 }
 
+
+.add_recipe_container{
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    text-align: center;
+    font-size: 1.4em;
+    
+}
+
+.add_recipe {
+    background-color: transparent;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    color: brown;
+}
+.add_recipe button {
+    background-color: #fb7d07;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 1.2em;
+}
+/*  */
+#type{
+    background-color: #FCFBF4;
+    color: brown;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+#submit{
+    background-color: #fb7d07;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 1.4em;
+}
+
 .footer {
     background-color: transparent;
     padding: 10px;
