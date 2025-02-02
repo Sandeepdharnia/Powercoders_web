@@ -441,7 +441,7 @@ aside{
 }
 
 
-.contact_us form {
+.contact_us_content1 form {
     width: 78%;
     min-height: 200px;
     position: relative;
@@ -450,7 +450,10 @@ aside{
     z-index:10;
     resize: none;
 }
-.contact_us form input[type="text"], .contact_us form input[type="email"], .contact_us form textarea {
+.contact_us_content1 form input[type="text"], 
+.contact_us_content1 form input[type="email"], 
+.contact_us_content1 form input[type="password"], 
+.contact_us_content1 form textarea {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
