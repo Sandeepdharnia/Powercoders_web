@@ -3,11 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 
 
 # Register your models here.
-from .models import Register
+from .models import CustomUser
 
 
 class CustomUserAdmin(UserAdmin):
-    model = Register
+    model = CustomUser
     list_display = ('email', 'username', 'is_active', 'is_staff')  # ✅ Ensure 'is_active' exists
     list_filter = ('is_active', 'is_staff', 'is_superuser')
     fieldsets = (
@@ -24,4 +24,4 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email', 'username')
     ordering = ('email',)
 
-admin.site.register(Register, CustomUserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)

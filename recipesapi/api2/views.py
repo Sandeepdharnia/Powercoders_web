@@ -2,35 +2,60 @@ from rest_framework.authtoken.models import Token
 from django.contrib import auth
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from rest_framework.authentication import authenticate, get_user_model
+from rest_framework.authentication import authenticate, get_user_model, TokenAuthentication
 from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from api2.models import Recipe, Register
+from api2.models import Recipe, CustomUser
 from api2.serializers import LoginSerializer, RecipeSerializer, RegisterSerializer
      
+User = get_user_model()  # ✅ Get the custom user model (Register)
+
+class ProtectedView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"message": "You are authenticated!"})
 
 # Create your views here.
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    permission_classes = [AllowAny] 
+    permission_classes = [IsAuthenticated] 
+    def perform_create(self, serializer):
+        serializer.save(writer=self.request.user)
 
 
 # Create a view for user registration
 
 class RegisterViewSet(CreateAPIView):
-    queryset = Register.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        
+        if serializer.is_valid():
+            user = serializer.save()  # ✅ Save the user first
+            token, _ = Token.objects.get_or_create(user=user)  # ✅ Generate token
+            
+            return Response(
+                {
+                    "message": "Registration successful!",
+                    "token": token.key
+                }, 
+                status=status.HTTP_201_CREATED
+            )
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Create a view for user login
 
 
-User = get_user_model()  # ✅ Get the custom user model (Register)
+
 
 # class LoginViewSet(APIView):
 #     def post(self, request):
@@ -63,6 +88,8 @@ User = get_user_model()  # ✅ Get the custom user model (Register)
 #             return Response({"error": "Invalid credentials."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# <-------Login View ----------------------------------------------------------------------------------------->
+
 class LoginViewSet(APIView):
     def post(self, request):
         email = request.data.get('email')
@@ -73,3 +100,29 @@ class LoginViewSet(APIView):
             token, _ = Token.objects.get_or_create(user=user)
             return Response({"token": token.key, "message": "Login successful"}, status=200)
         return Response({"error": "Invalid credentials"}, status=400)
+
+
+
+# <-------Logout View ----------------------------------------------------------------------------------------->
+
+class LogoutViewSet(APIView):
+    def post(self, request):
+        # Ensure the user is authenticated
+        print("Received logout request:", request.headers)  # Debugging
+        print("Auth:", request.auth)  # Debugging
+        if request.auth:
+            
+            # Delete the token to log the user out
+            request.auth.delete()
+            return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
+        return Response({"error": "User not logged in"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# <-------UserRecipe View ----------------------------------------------------------------------------------------->
+class UserRecipeViewSet(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        recipes = Recipe.objects.filter(writer=request.user)
+        serializer = RecipeSerializer(recipes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

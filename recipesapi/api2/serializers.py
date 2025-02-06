@@ -1,18 +1,22 @@
 from rest_framework import serializers
-from api2.models import Recipe, Register
+from test.test_importlib import source
+from api2.models import Recipe, CustomUser
 
 class RecipeSerializer(serializers.ModelSerializer):
+    writer_username = serializers.CharField(source="writer.username", read_only=True)
     class Meta:
         model = Recipe
-        fields = '__all__'
+        fields = ["id", "title", "ingredients", "prepare_process", "serve", "type", "type_meal", "writer_username"]
+        read_only_fields = ["writer_username"]
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)  # Used for confirmation
 
     class Meta:
-        model = Register
+        model = CustomUser
         fields = ['id', 'username', 'email', 'password', 'confirm_password']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def validate(self, data):
         if data['password'] != data['confirm_password']:
@@ -20,15 +24,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        validated_data.pop('confirm_password')  # Remove password2 before saving
-        user = Register(
-            email=validated_data['email'],
-            username=validated_data['username']
-        )
-        user.set_password(validated_data['password'])
-        user.save()
+        validated_data.pop('confirm_password')  # Remove confirm password before saving
+        user = CustomUser.objects.create_user(**validated_data)  # Use custom manager
         return user
-        #return super().create(validated_data)
+
     
 
 class LoginSerializer(serializers.Serializer):
