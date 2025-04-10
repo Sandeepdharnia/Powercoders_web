@@ -5,13 +5,13 @@ import Video from "./cooking_ready.mp4"
 
 function Header() {
     return (
-      <div class="container">
-        <div class="header">
-          <div class="backgroundvideo1">
+      <div className="container">
+        <div className="header">
+          <div className="backgroundvideo1">
             <video autoPlay loop muted src={Video} type="video/mp4" />
           </div>
           <h1> Delicious Recipes</h1>
-          <nav class="navbar">
+          <nav className="navbar">
             <ul>
               <li>
                 <a href="/">Home</a>
