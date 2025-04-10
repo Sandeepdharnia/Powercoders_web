@@ -1,0 +1,130 @@
+
+.contact_us {
+    background-color: transparent;
+    padding: 10px;
+    margin-top: 10vh;
+    width: 100%;
+    height: auto;
+    color: #fb7d07;
+    border-radius: 10px;
+    
+}
+
+.contact_us_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+
+}
+.contact_us_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+    
+    
+    font-size: 1.4em;
+}
+.contact_us_content1{
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    color: brown;
+    width: 70%;
+    height: 60%;
+    
+    font-size: 1.4em;
+}
+
+
+.contact_us_content1 form {
+    width: 78%;
+    min-height: 200px;
+    position: relative;
+    top:0%;
+    right:0%;
+    z-index:10;
+    resize: none;
+}
+.contact_us_content1 form input[type="text"], 
+.contact_us_content1 form input[type="email"], 
+.contact_us_content1 form input[type="password"], 
+.contact_us_content1 form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+
+
+.contact_us .contact_info {
+    width: 48%;
+}
+
+
+
+.add_recipe_container{
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #FCFBF4;
+    text-align: center;
+    font-size: 1.4em;
+    
+}
+
+.add_recipe {
+    background-color: transparent;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    color: brown;
+}
+.add_recipe button {
+    background-color: #fb7d07;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 1.2em;
+    border: none;
+}
+/*  */
+.submit_options{
+    background-color: #FCFBF4;
+    color: brown;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+#submit{
+    background-color: #fb7d07;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+}

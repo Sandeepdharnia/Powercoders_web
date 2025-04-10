@@ -1,3 +1,5 @@
+from time import sleep
+from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from django.contrib import auth
 from django.http import JsonResponse
@@ -8,8 +10,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from api2.models import Recipe, CustomUser
-from api2.serializers import LoginSerializer, RecipeSerializer, RegisterSerializer
+from api2.models import Recipe, CustomUser, ReportRecipe
+from api2.serializers import LoginSerializer, RecipeSerializer, RegisterSerializer, ReportRecipeSerializer
      
 User = get_user_model()  # ✅ Get the custom user model (Register)
 
@@ -27,6 +29,23 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated] 
     def perform_create(self, serializer):
         serializer.save(writer=self.request.user)
+    
+
+class ReportRecipeViewSet(viewsets.ModelViewSet):
+    queryset = ReportRecipe.objects.all()
+    serializer_class = ReportRecipeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        recipe_id = self.request.data.get('recipe')
+
+        if ReportRecipe.objects.filter(user = user, recipe_id = recipe_id).exists():
+            return Response (
+                {"error":"You have already reposted this recipe. "},
+                status=status.status.HTTP_400_BAD_REQUEST
+            )
+        serializer.save(user=user)
 
 
 # Create a view for user registration
