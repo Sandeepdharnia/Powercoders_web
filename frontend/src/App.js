@@ -83,23 +83,3 @@ function App() {
 export default App;
 
 
-// function App() {
-//   return (
-//     <div>
-//       <Header />
-//       <Home />
-//       <HomeMiddle />
-//       <Footer />
-//     </div>
-//   );
-// }
-
-// export default App;
-
- 
- {
-   /* <Route path="/main_meals" element={<MainCourses />} />
-        <Route path="/desserts" element={<Desserts />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/user/registration" element={<Registration />} /> */
- }
