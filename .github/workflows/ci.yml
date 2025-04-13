@@ -36,7 +36,7 @@ jobs:
       POSTGRES_DB: my_recipe_database
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: supersecure
-      DB_HOST: localhost
+      DB_HOST: db
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
