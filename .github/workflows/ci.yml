@@ -11,6 +11,10 @@ jobs:
     name: Django Backend CI
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./recipesapi
+
     services:
       postgres:
         image: postgres:15
