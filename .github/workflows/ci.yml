@@ -37,6 +37,7 @@ jobs:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: supersecure
       DB_HOST: localhost
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
       - uses: actions/checkout@v3
