@@ -107,8 +107,7 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"postgres://{config('POSTGRES_USER')}:{config('POSTGRES_PASSWORD')}@{config('DB_HOST')}:{config('DB_PORT')}/{config('POSTGRES_DB')}"
-    )
+        default='postgres://postgres:postgres@localhost:5432/mydb')
 }
 
 
