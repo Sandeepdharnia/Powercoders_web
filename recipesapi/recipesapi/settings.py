@@ -32,7 +32,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS').split(',')
 
 
 # Application definition
@@ -210,3 +211,5 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = 'api2.CustomUser'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
