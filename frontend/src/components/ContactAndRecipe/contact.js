@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./contactAndRecipe.css";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const ContactUs = () => {
 
     // You can also send this data to a backend here
     //fetch("http://127.0.0.1:8000/api/v1/login/"
-    fetch("http://127.0.0.1:8000/api/v1/login/", {
+    fetch(`${API_BASE}/api/v1/login/`, {
       method: "POST",
       body: JSON.stringify(formData),
     });

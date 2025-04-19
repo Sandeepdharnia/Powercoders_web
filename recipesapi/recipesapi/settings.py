@@ -102,13 +102,16 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 #     }
 # }
 
-
-
+db_url = dj_database_url.config()
+print(f"Connecting to DB: {db_url}")
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://postgres:postgres@localhost:5432/mydb')
+    'default': db_url
 }
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgres://postgres:postgres@localhost:5432/mydb')
+# }
 
 
 # DATABASES = {
@@ -181,10 +184,13 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5500',  # Frontend origin
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://127.0.0.1:5500',  # Frontend origin
+# ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://cookinglovepassion.netlify.app",
+]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:5500',

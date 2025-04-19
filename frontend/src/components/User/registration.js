@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/register/", {
+      const response = await fetch(`${API_BASE}/api/v1/register/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,7 +37,7 @@ const RegisterForm = () => {
           username: formData.username,
           email: formData.email,
           password: formData.password,
-          confirm_password: formData.confirm_password
+          confirm_password: formData.confirm_password,
         }),
       });
 
