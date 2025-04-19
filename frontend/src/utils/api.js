@@ -1,8 +1,8 @@
-let API_BASE;
-try {
-    API_BASE = import.meta.env.VITE_API_URL; 
-    
-} catch {
-    API_BASE = "http://localhost:8000";
-}
+let API_BASE = 
+typeof import.meta !== "undefined" &&
+import.meta.env &&
+import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL
+  : "http://localhost:8000";
+
 export default API_BASE;
