@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
 import "./login-out.css"
-const API_BASE = import.meta.env.VITE_API_URL;
-
+import API_BASE from "../../utils/api";
 const LoginLogout = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
