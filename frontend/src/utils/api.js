@@ -1,8 +1,13 @@
-let API_BASE = 
-typeof import.meta !== "undefined" &&
-import.meta.env &&
-import.meta.env.VITE_API_URL
-  ? import.meta.env.VITE_API_URL
-  : "http://localhost:8000";
+let API_BASE = "http://localhost:8000";
+
+if (typeof process !== "undefined" && process.env && process.env.VITE_API_URL) {
+  API_BASE = process.env.VITE_API_URL;
+} else if (
+  typeof import.meta !== "undefined" &&
+  import.meta.env &&
+  import.meta.env.VITE_API_URL
+) {
+  API_BASE = import.meta.env.VITE_API_URL;
+}
 
 export default API_BASE;
