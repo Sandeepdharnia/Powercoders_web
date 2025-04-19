@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
 import "./login-out.css"
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const LoginLogout = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ const LoginLogout = () => {
 console.log('this is line 24', data);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/login/", {
+      const response = await fetch(`${API_BASE}/api/v1/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +59,7 @@ console.log('this is line 24', data);
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/logout/", {
+      const response = await fetch(`${API_BASE}/api/v1/logout/`, {
         method: "POST",
         headers: {
           Authorization: `Token ${token}`,
