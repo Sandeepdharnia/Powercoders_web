@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
-const API_BASE = import.meta.env.VITE_API_URL;
+import API_BASE from '../../utils/api';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({

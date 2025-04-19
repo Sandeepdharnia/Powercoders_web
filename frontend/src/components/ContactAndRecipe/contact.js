@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./contactAndRecipe.css";
-const API_BASE = import.meta.env.VITE_API_URL;
+import API_BASE from "../../utils/api";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
