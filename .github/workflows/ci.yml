@@ -33,10 +33,13 @@ jobs:
           --health-retries 5
 
     env:
+      DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1
+      DEBUG: True
       POSTGRES_DB: my_recipe_database
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: supersecure
       DB_HOST: localhost
+      DB_PORT: 5432
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
     steps:
