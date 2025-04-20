@@ -40,7 +40,8 @@ jobs:
       POSTGRES_PASSWORD: supersecure
       DB_HOST: localhost
       DB_PORT: 5432
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
+      
 
     steps:
       - uses: actions/checkout@v3
