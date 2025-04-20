@@ -109,12 +109,24 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 #     'default': db_url
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT', '5432')}/{os.getenv('POSTGRES_DB')}",
-        conn_max_age=600
-    )
-}
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('POSTGRES_DB', 'my_recipe_database'),
+            'USER': os.getenv('POSTGRES_USER', 'sandeepdharnia'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'supersecure'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+        }
+    }
+
 # DATABASES = {
 #     'default': dj_database_url.config(
 #         default='postgres://postgres:postgres@localhost:5432/mydb')
