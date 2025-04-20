@@ -102,11 +102,18 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 #     }
 # }
 
-db_url = dj_database_url.config()
-print(f"Connecting to DB: {db_url}")
+# db_url = dj_database_url.config()
+# print(f"Connecting to DB: {db_url}")
+
+# DATABASES = {
+#     'default': db_url
+# }
 
 DATABASES = {
-    'default': db_url
+    'default': dj_database_url.config(
+        default=f"postgres://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT', '5432')}/{os.getenv('POSTGRES_DB')}",
+        conn_max_age=600
+    )
 }
 # DATABASES = {
 #     'default': dj_database_url.config(
