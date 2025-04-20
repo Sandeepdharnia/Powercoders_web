@@ -1,4 +1,5 @@
-from time import sleep
+import logging
+import traceback
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from django.contrib import auth
@@ -15,6 +16,7 @@ from api2.serializers import LoginSerializer, RecipeSerializer, RegisterSerializ
      
 User = get_user_model()  # ✅ Get the custom user model (Register)
 
+logger = logging.getLogger(__name__)
 class ProtectedView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -50,27 +52,51 @@ class ReportRecipeViewSet(viewsets.ModelViewSet):
 
 # Create a view for user registration
 
+# class RegisterViewSet(CreateAPIView):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = RegisterSerializer
+
+#     def create(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+        
+#         if serializer.is_valid():
+#             user = serializer.save()  # ✅ Save the user first
+#             token, _ = Token.objects.get_or_create(user=user)  # ✅ Generate token
+            
+#             return Response(
+#                 {
+#                     "message": "Registration successful!",
+#                     "token": token.key
+#                 }, 
+#                 status=status.HTTP_201_CREATED
+#             )
+        
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class RegisterViewSet(CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        
-        if serializer.is_valid():
-            user = serializer.save()  # ✅ Save the user first
-            token, _ = Token.objects.get_or_create(user=user)  # ✅ Generate token
-            
+        try:
+            serializer.is_valid(raise_exception=True)
+            user = serializer.save()
+            token, _ = Token.objects.get_or_create(user=user)
             return Response(
                 {
                     "message": "Registration successful!",
                     "token": token.key
-                }, 
+                },
                 status=status.HTTP_201_CREATED
             )
-        
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        except ValidationError as e:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.error("Registration failed:\n%s", traceback.format_exc())
+            return Response(
+                {"error": "Internal Server Error", "details": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 # Create a view for user login
 
 
