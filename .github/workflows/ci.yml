@@ -40,7 +40,6 @@ jobs:
       POSTGRES_PASSWORD: supersecure
       DB_HOST: localhost
       DB_PORT: 5432
-      DJANGO_ALLOWED_HOSTS: ${{ secrets.DJANGO_ALLOWED_HOSTS }}
       
 
     steps:
