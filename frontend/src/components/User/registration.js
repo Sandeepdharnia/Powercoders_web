@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
-import API_BASE from '../../utils/api';
+// import API_BASE from '../../utils/api';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -28,18 +28,20 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE}/api/v1/register/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-          confirm_password: formData.confirm_password,
-        }),
-      });
+      const response = await fetch('https://powercoders-web.onrender.com/api/v1/register/',
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+            confirm_password: formData.confirm_password,
+          }),
+        }
+      );
 
       const data = await response.json();
       console.log(data);

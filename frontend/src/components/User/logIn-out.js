@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
 import "./login-out.css"
-import API_BASE from "../../utils/api";
+// import API_BASE from "../../utils/api";
 const LoginLogout = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ const LoginLogout = () => {
 console.log('this is line 24', data);
 
     try {
-      const response = await fetch(`${API_BASE}/api/v1/login/`, {
+      const response = await fetch('https://powercoders-web.onrender.com/api/v1/login/', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,12 +58,14 @@ console.log('this is line 24', data);
     }
 
     try {
-      const response = await fetch(`${API_BASE}/api/v1/logout/`, {
-        method: "POST",
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
+      const response = await fetch('https://powercoders-web.onrender.com/api/v1/logout/',
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         localStorage.removeItem("authToken");
