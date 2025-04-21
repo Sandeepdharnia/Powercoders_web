@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api2',
     'accounts',
+    "corsheaders",
 
 ]
 
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 INSTALLED_APPS += ['corsheaders']
@@ -211,6 +213,9 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "https://cookinglovepassion.netlify.app",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
+
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:5500',
