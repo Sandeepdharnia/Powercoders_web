@@ -207,11 +207,15 @@ REST_FRAMEWORK = {
 #     'http://127.0.0.1:5500',  # Frontend origin
 # ]
 
+# CORS_ALLOWED_ORIGINS = [
+#     "https://cookinglovepassion.netlify.app",
+# ]
 CORS_ALLOWED_ORIGINS = [
-    "https://cookinglovepassion.netlify.app",
+    "http://localhost:3000",  # Or wherever your frontend runs locally
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
+#CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
+CORS_ALLOW_ALL_ORIGINS = False  # ⚠️ Only for testing
 
 
 CSRF_TRUSTED_ORIGINS = [
