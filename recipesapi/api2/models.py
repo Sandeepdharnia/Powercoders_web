@@ -2,8 +2,6 @@ from csv import writer
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
-
-from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from rest_framework.authentication import get_user_model  # ✅ Import settings for AUTH_USER_MODEL
@@ -102,3 +100,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email 
+
+
+# Contact form 
+
+class ContactMessage(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message from {self.first_name} {self.last_name} ({self.email})"
+

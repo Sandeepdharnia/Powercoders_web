@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.db import router
 from django.urls import include, path
 from rest_framework import routers
-from api2.views import LoginViewSet, LogoutViewSet, RecipeViewSet, RegisterViewSet, ReportRecipeViewSet, UserRecipeViewSet
+from api2.views import LoginViewSet, LogoutViewSet, RecipeViewSet, RegisterViewSet, ReportRecipeViewSet, UserRecipeViewSet, ContactUsView
 
 router = routers.DefaultRouter()
 router.register(r'recipes', RecipeViewSet, basename='recipe')
@@ -18,6 +18,7 @@ urlpatterns = [
     path('logout/', LogoutViewSet.as_view(), name='logout'),  # User logout endpoint.
     path('my_recipes/', UserRecipeViewSet.as_view(), name='user_recipe'),  # User logout endpoint.
     path('report_recipe/', ReportRecipeViewSet.as_view({'post': 'create', 'get': 'list'}), name='report_recipe'),  # report recipe endpoint.
+    path("contact/", ContactUsView.as_view(), name="contact_us"),
     
 
 ]

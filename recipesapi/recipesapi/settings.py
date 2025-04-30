@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
-import dj_database_url
+
+#from django.conf.global_settings import STATICFILES_STORAGE
+# from whitenoise import WhiteNoise
+# from decouple import config
+# import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-x$z-j3a)gc(dp%a_-vkzv&bfk47)7rp^w5@46@qlq_(zigz@&g'
+SECRET_KEY = 'django-insecure-x$z-j3a)gc(dp%a_-vkzv&bfk47)7rp^w5@46@qlq_(zigz@&g'
 
 # SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
@@ -33,8 +36,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS').split(',')
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS').split(',')
 
 
 # Application definition
@@ -51,10 +54,12 @@ INSTALLED_APPS = [
     'api2',
     'accounts',
     "corsheaders",
+    
 
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,7 +68,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 ]
 
 
@@ -92,15 +98,15 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#         'OPTIONS': {
-#             'timeout': 20,  # Set a longer timeout for database locks
-#         },
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        'OPTIONS': {
+            'timeout': 20,  # Set a longer timeout for database locks
+        },
+    }
+}
 
 # db_url = dj_database_url.config()
 # print(f"Connecting to DB: {db_url}")
@@ -109,23 +115,23 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 #     'default': db_url
 # }
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# DATABASE_URL = os.getenv("DATABASE_URL")
 
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600)
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('POSTGRES_DB', 'my_recipe_database'),
-            'USER': os.getenv('POSTGRES_USER', 'sandeepdharnia'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'supersecure'),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-        }
-    }
+# if DATABASE_URL:
+#     DATABASES = {
+#         'default': dj_database_url.config(conn_max_age=600)
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.getenv('POSTGRES_DB', 'recipes_db'),
+#             'USER': os.getenv('POSTGRES_USER', 'postgres'),
+#             'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'supersecure'),
+#             'HOST': os.getenv('DB_HOST', 'localhost'),
+#             'PORT': os.getenv('DB_PORT', '5432'),
+#         }
+#     }
 
 # DATABASES = {
 #     'default': dj_database_url.config(
@@ -184,7 +190,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -211,17 +217,22 @@ REST_FRAMEWORK = {
 #     "https://cookinglovepassion.netlify.app",
 # ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Or wherever your frontend runs locally
+    "http://localhost:3000",
+    "http://127.0.0.1:5500",  # if using simple HTML
+    "http://localhost:8000",  # Or wherever your frontend runs locally
+    "http://localhost:3001",
 ]
 
-#CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
-CORS_ALLOW_ALL_ORIGINS = False  # ⚠️ Only for testing
+CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
+# CORS_ALLOW_ALL_ORIGINS = False  # ⚠️ Only for testing
 
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:5500',
     #'http://127.0.0.1:5500/contact/your_recipe.html',
     'http://127.0.0.1:8000',
+    'http://localhost:3000',
+    "http://localhost:3001",
 ]
 
 
@@ -243,4 +254,7 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = 'api2.CustomUser'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static/'  # Optional: only if you have your own static folder
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

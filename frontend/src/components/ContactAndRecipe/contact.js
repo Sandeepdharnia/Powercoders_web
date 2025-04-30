@@ -21,28 +21,45 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // You can validate fields here if needed
-    console.log("Form submitted:", formData);
+    const token = localStorage.getItem("authToken");
 
-    // Clear the form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      message: "",
-    });
-
-    setSubmitted(true);
-
-    // You can also send this data to a backend here
-    //fetch("http://127.0.0.1:8000/api/v1/login/"
-    fetch('https://powercoders-web.onrender.com/api/v1/login/', {
-      method: "POST",
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/v1/contact/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && { Authorization: `Token ${token}` }),
+        },
+        body: JSON.stringify({
+          first_name: formData.firstName, // Ensure the correct key here
+          last_name: formData.lastName, // Ensure the correct key here
+          email: formData.email,
+          message: formData.message,
+        }),
+        credentials: "include",
+      });
+      console.log(formData);
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          message: "",
+        });
+        console.log("Message sent successfully");
+      } else {
+        const error = await response.json();
+        console.error("Failed to submit contact form:", error);
+        alert("Failed to submit message. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error submitting contact form:", err);
+      alert("Something went wrong. Please try again later.");
+    }
   };
 
   return (
@@ -79,7 +96,10 @@ const ContactUs = () => {
         <div className="contact_us_content1">
           {submitted ? (
             <p className="thank_you">
-              <span role="img" aria-label="Ok">✅ </span> Thank you! We’ve received your message.
+              <span role="img" aria-label="Ok">
+                ✅{" "}
+              </span>{" "}
+              Thank you! We’ve received your message.
             </p>
           ) : (
             <form className="contact_form" onSubmit={handleSubmit}>
