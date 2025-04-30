@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 //import Swal from "sweetalert2";
 // import API_BASE from '../../utils/api';
+import "./login-out.css";
+;
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -28,7 +30,8 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await fetch('https://powercoders-web.onrender.com/api/v1/register/',
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/v1/register/",
         {
           method: "POST",
           headers: {
@@ -42,6 +45,8 @@ const RegisterForm = () => {
           }),
         }
       );
+      console.log(formData);
+      
 
       const data = await response.json();
       console.log(data);

@@ -1,11 +1,13 @@
 from dataclasses import field
-import spacy
+# import spacy
 from rest_framework import serializers
+from django import forms
+
 # from test.test_importlib import source
-from api2.models import Recipe, CustomUser, ReportRecipe
+from api2.models import ContactMessage, Recipe, CustomUser, ReportRecipe, ContactMessage
 
 
-nlp = spacy.load("en_core_web_sm")
+# nlp = spacy.load("en_core_web_sm")
 class RecipeSerializer(serializers.ModelSerializer):
     writer_username = serializers.CharField(source="writer.username", read_only=True)
     class Meta:
@@ -109,4 +111,19 @@ class LoginSerializer(serializers.Serializer):
         if not email or not password:
             raise serializers.ValidationError("Both username and password are required.")
 
+        return data
+    
+# Contact form serializer
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ['first_name', 'last_name', 'email', 'message']
+    
+    def validate(self, data):
+        # Custom validation can be added here
+        if not data.get('first_name') or not data.get('last_name'):
+            raise serializers.ValidationError("First name and last name are required.")
+        if not data.get('email'):
+            raise serializers.ValidationError("Email is required.")
         return data

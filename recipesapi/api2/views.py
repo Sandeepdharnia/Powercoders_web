@@ -4,6 +4,7 @@ from rest_framework import permissions
 from rest_framework.authtoken.models import Token
 from django.contrib import auth
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from rest_framework.authentication import authenticate, get_user_model, TokenAuthentication
 from rest_framework.generics import CreateAPIView
@@ -12,7 +13,7 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from api2.models import Recipe, CustomUser, ReportRecipe
-from api2.serializers import LoginSerializer, RecipeSerializer, RegisterSerializer, ReportRecipeSerializer
+from api2.serializers import  RecipeSerializer, RegisterSerializer, ReportRecipeSerializer, ContactMessageSerializer
      
 User = get_user_model()  # ✅ Get the custom user model (Register)
 
@@ -77,7 +78,10 @@ class RegisterViewSet(CreateAPIView):
     serializer_class = RegisterSerializer
 
     def create(self, request, *args, **kwargs):
+        print("📥 RegisterViewSet called")
+        print("Request data:", request.data)
         serializer = self.get_serializer(data=request.data)
+        print(serializer)
         try:
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
@@ -90,8 +94,11 @@ class RegisterViewSet(CreateAPIView):
                 status=status.HTTP_201_CREATED
             )
         except ValidationError as e:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            print("Validation Error:", e.detail)
+            #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
+            print("Validation Error:", serializer.errors)
             logger.error("Registration failed:\n%s", traceback.format_exc())
             return Response(
                 {"error": "Internal Server Error", "details": str(e)},
@@ -171,3 +178,32 @@ class UserRecipeViewSet(APIView):
         recipes = Recipe.objects.filter(writer=request.user)
         serializer = RecipeSerializer(recipes, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# ContactFormviews
+
+class ContactUsView(APIView):
+    permission_classes = [permissions.IsAuthenticated]  # Ensure only logged-in users can submit
+    authentication_classes = [TokenAuthentication]
+
+    def post(self, request):
+        # Get the logged-in user
+        user = request.user
+        print(user)
+
+        # Add user to the data, so it gets saved in the model
+        data = request.data
+        data['user'] = user.id
+
+        print('this is data', data, data['user'])
+
+        # Serialize and save the data
+        serializer = ContactMessageSerializer(data=data)
+        print(serializer)
+
+        if serializer.is_valid():
+            serializer.save(user=request.user)  # Save the message to the database
+            return Response({"message": "Your message has been submitted successfully!"}, status=status.HTTP_201_CREATED)
+        else:
+            print(f"Serializer errors: {serializer.errors}")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

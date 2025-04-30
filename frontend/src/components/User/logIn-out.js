@@ -24,15 +24,18 @@ const LoginLogout = () => {
 console.log('this is line 24', data);
 
     try {
-      const response = await fetch('https://powercoders-web.onrender.com/api/v1/login/', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // ...(token && { Authorization: `Token ${token}` }),
-        },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/v1/login/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+             ...(token && { Authorization: `Token ${token}` }),
+          },
+          body: JSON.stringify(data),
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
@@ -58,7 +61,8 @@ console.log('this is line 24', data);
     }
 
     try {
-      const response = await fetch('https://powercoders-web.onrender.com/api/v1/logout/',
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/v1/logout/",
         {
           method: "POST",
           headers: {
@@ -69,13 +73,7 @@ console.log('this is line 24', data);
 
       if (response.ok) {
         localStorage.removeItem("authToken");
-        // Swal.fire({
-        //   icon: "success",
-        //   title: "Logged out!",
-        //   text: "You are now logged out.",
-        //   timer: 2000,
-        //   showConfirmButton: false,
-        // });
+        
         window.location.href = "/login_logout";
         alert("You logged out. Bye bye")
       } else {

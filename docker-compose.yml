@@ -41,34 +41,22 @@
 
 # volumes:
 #   pgdata:
+
+
 version: '3.12'
 
 services:
-  db:
-    image: postgres:15
-    container_name: postgres
-    environment:
-      POSTGRES_DB: my_recipe_database
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: supersecure
-      DB_HOST: localhost
-      DB_PORT: 5432
-      
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   backend:
+    platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./recipesapi:/app
+      - ./recipesapi/recipesapi:/app
     ports:
       - "8000:8000"
     env_file:
       - .env
-    depends_on:
-      - db
 
   frontend:
     build:
@@ -76,8 +64,4 @@ services:
       dockerfile: Dockerfile 
     ports:
       - "3000:80"
-    depends_on:
-      - db
 
-volumes:
-  pgdata:
