@@ -27,3 +27,5 @@ yarn-error.log*
 README2.md
 
 .venv/
+.frontend/node_modules/
+.frontend/build/

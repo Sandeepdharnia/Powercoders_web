@@ -258,6 +258,6 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static/'  # Optional: only if you have your own static folder
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'staticfiles')
+    os.path.join(BASE_DIR, 'recipesapi/frontend/static')
     ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
