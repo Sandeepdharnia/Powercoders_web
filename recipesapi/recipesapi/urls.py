@@ -21,7 +21,7 @@ from django.http import HttpResponse
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/',include('api2.urls')),
-    path('', lambda request: HttpResponse("Welcome to the API!")),
+    # path('', lambda request: HttpResponse("Welcome to the API!")),
 ]
 
 urlpatterns += [
