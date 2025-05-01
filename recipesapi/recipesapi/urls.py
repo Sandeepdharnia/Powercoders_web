@@ -31,3 +31,10 @@ urlpatterns = [
 # urlpatterns += [
 #     path('', TemplateView.as_view(template_name="index.html")),
 # ]
+    # path('', lambda request: HttpResponse("Welcome to the API!")),
+]
+
+# urlpatterns += [
+#     path('', TemplateView.as_view(template_name="index.html")),
+# ]
+
