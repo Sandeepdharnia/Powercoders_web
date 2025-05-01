@@ -79,7 +79,7 @@ ROOT_URLCONF = 'recipesapi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -256,5 +256,7 @@ AUTH_USER_MODEL = 'api2.CustomUser'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static/'  # Optional: only if you have your own static folder
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'staticfiles')
+    ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

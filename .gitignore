@@ -25,3 +25,5 @@ yarn-error.log*
 .env
 
 README2.md
+
+.venv/
