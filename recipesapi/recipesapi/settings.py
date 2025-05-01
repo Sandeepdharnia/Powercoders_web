@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
 
@@ -256,6 +256,7 @@ AUTH_USER_MODEL = 'api2.CustomUser'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static/'  # Optional: only if you have your own static folder
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'staticfiles')
     ]

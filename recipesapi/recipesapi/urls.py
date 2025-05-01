@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/',include('api2.urls')),
+    path('', lambda request: HttpResponse("Welcome to the API!")),
 ]
 
 urlpatterns += [
