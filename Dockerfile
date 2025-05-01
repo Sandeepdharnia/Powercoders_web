@@ -38,7 +38,7 @@
 
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-FROM python:3.10
+FROM python:3.10-slim
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -65,13 +65,27 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 COPY recipesapi/recipesapi/ .
+COPY recipesapi/manage.py .
+
 
 COPY recipesapi/ .
 COPY frontend/package*.json ./frontend/
 COPY frontend/ ./frontend/
 
+COPY recipesapi/frontend/ ./recipesapi/frontend/
+
+# Copy built frontend
+# COPY recipesapi/frontend /app/recipesapi/frontend
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+
 # Expose port
 EXPOSE 8000
 
 # Run server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# Run app with Gunicorn (better for production)
+CMD ["gunicorn", "recipesapi.wsgi:application", "--bind", "0.0.0.0:8000"]
