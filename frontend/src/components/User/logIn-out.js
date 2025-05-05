@@ -24,12 +24,12 @@ console.log('this is line 24', data);
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/v1/login/",
+        "https://powercoders-web.onrender.com/api/v1/login/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-             ...(token && { Authorization: `Token ${token}` }),
+            ...(token && { Authorization: `Token ${token}` }),
           },
           body: JSON.stringify(data),
           credentials: "include",
@@ -61,7 +61,7 @@ console.log('this is line 24', data);
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/v1/logout/",
+        "https://powercoders-web.onrender.com/api/v1/logout/",
         {
           method: "POST",
           headers: {
