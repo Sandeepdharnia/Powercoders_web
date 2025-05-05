@@ -97,8 +97,8 @@ const ContactUs = () => {
           {submitted ? (
             <p className="thank_you">
               <span role="img" aria-label="Ok">
-                ✅{" "}
-              </span>{" "}
+                ✅
+              </span>
               Thank you! We’ve received your message.
             </p>
           ) : (

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-//import Swal from "sweetalert2";
 import "./login-out.css"
-// import API_BASE from "../../utils/api";
+
 const LoginLogout = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,7 +72,6 @@ console.log('this is line 24', data);
 
       if (response.ok) {
         localStorage.removeItem("authToken");
-        
         window.location.href = "/login_logout";
         alert("You logged out. Bye bye")
       } else {
@@ -129,7 +127,7 @@ console.log('this is line 24', data);
 
         <div className="contact_us_content">
           <p>
-            Want to leave us{" "}
+            Want to leave us
             <span role="img" aria-label="sad_emoji">
               😞
             </span>

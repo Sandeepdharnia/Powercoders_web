@@ -17,6 +17,7 @@ urlpatterns = [
     path('login/', LoginViewSet.as_view(), name='login'),  # User login endpoint.
     path('logout/', LogoutViewSet.as_view(), name='logout'),  # User logout endpoint.
     path('my_recipes/', UserRecipeViewSet.as_view(), name='user_recipe'),  # User logout endpoint.
+    path('submit_recipes/', RecipeViewSet.as_view({'post': 'create', 'get': 'list'}), name='submit_recipes'), 
     path('report_recipe/', ReportRecipeViewSet.as_view({'post': 'create', 'get': 'list'}), name='report_recipe'),  # report recipe endpoint.
     path("contact/", ContactUsView.as_view(), name="contact_us"),
     
