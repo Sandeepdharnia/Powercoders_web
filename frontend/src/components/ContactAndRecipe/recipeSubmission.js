@@ -12,33 +12,63 @@ const AddRecipeForm = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Recipe submitted:", formData);
-    setSubmitted(true);
+    // send `formData` to a backend here
+    const handleSubmit = async (e) => {
+      e.preventDefault();
 
-    // Reset the form
-    setFormData({
-      title: "",
-      ingredients: "",
-      prepare_process: "",
-      serve: "",
-      type: "asian",
-      type_meal: "appetizer",
-    });
+      const token = localStorage.getItem("authToken");
 
-    // You could send `formData` to a backend here
-  };
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/v1/submit_recipes/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              ...(token && { Authorization: `Token ${token}` }),
+            },
+            body: JSON.stringify({
+              title: formData.title, // Ensure the correct key here
+              ingredients: formData.ingredients, // Ensure the correct key here
+              prepare_process: formData.prepare_process,
+              serve: formData.serve,
+              type: formData.type,
+              type_meal: formData.type_meal,
+            }),
+            credentials: "include",
+          }
+        );
+        console.log(formData);
+        if (response.ok) {
+          setSubmitted(true);
+          setFormData({
+            title: "",
+            ingredients: "",
+            prepare_process: "",
+            serve: "",
+            type: "",
+            type_meal: "",
+          });
+          console.log("Message sent successfully");
+        } else {
+          const error = await response.json();
+          console.error("Failed to submit contact form:", error);
+          alert("Failed to submit message. Please try again.");
+        }
+      } catch (err) {
+        console.error("Error submitting contact form:", err);
+        alert("Something went wrong. Please try again later.");
+      }
+    };
 
   return (
     <>
@@ -155,5 +185,6 @@ const AddRecipeForm = () => {
     </>
   );
 };
+
 
 export default AddRecipeForm;
