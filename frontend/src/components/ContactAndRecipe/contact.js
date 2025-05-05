@@ -27,20 +27,24 @@ const ContactUs = () => {
     const token = localStorage.getItem("authToken");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/v1/contact/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(token && { Authorization: `Token ${token}` }),
-        },
-        body: JSON.stringify({
-          first_name: formData.firstName, // Ensure the correct key here
-          last_name: formData.lastName, // Ensure the correct key here
-          email: formData.email,
-          message: formData.message,
-        }),
-        credentials: "include",
-      });
+      // const response = await fetch("http://127.0.0.1:8000/api/v1/contact/",
+      const response = await fetch(
+        "https://powercoders-web.onrender.com/api/v1/contact/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Token ${token}` }),
+          },
+          body: JSON.stringify({
+            first_name: formData.firstName, // Ensure the correct key here
+            last_name: formData.lastName, // Ensure the correct key here
+            email: formData.email,
+            message: formData.message,
+          }),
+          credentials: "include",
+        }
+      );
       console.log(formData);
       if (response.ok) {
         setSubmitted(true);

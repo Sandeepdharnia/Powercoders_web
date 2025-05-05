@@ -31,7 +31,7 @@ const RegisterForm = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/v1/register/",
+        "https://powercoders-web.onrender.com/api/v1/register/",
         {
           method: "POST",
           headers: {

@@ -29,7 +29,7 @@ const AddRecipeForm = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/v1/submit_recipes/",
+          "https://powercoders-web.onrender.com/api/v1/submit_recipes/",
           {
             method: "POST",
             headers: {
