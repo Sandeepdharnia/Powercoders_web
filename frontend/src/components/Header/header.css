@@ -1,136 +1,122 @@
-*{
-    margin: 0, 0, 0, 0;
-    padding: auto;
-    box-sizing: border-box;
-    font-family: sans-serif;
+* {
+  margin: 0, 0, 0, 0;
+  padding: auto;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
-
 
 .container {
-    margin-top: 100px;
-    display: flex;
-    flex-direction: column;
-    grid-template-columns: repeat(3, 1fr);
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    gap: 3em;
-    border-radius: 10px;
-    height: 100%;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: repeat(3, 1fr);
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 3em;
+  border-radius: 10px;
+  height: 100%;
 }
 .header {
-    background-color: transparent;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    width: 100%;
-    height: 45%;
-    color: #fb7d07;
-    border-radius: 10px;
-    position: relative;
-    
+  background-color: transparent;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 100%;
+  height: 45%;
+  color: #fb7d07;
+  border-radius: 10px;
+  position: relative;
 }
 
-.backgroundvideo1{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-      
-    z-index: -100;
-    object-fit: cover;
-    margin-top: 15px;
-    overflow: hidden;
+
+.backgroundvideo1 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -100;
+  object-fit: cover;
+  margin-top: 15px;
+  overflow: hidden;
 }
 
-.backgroundvideo1 video{
-    width: 100%;
-    height: 100%;   
-    overflow: hidden;
-    /* position: absolute; */
-    
+.backgroundvideo1 video {
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
 }
 
-nav{
-    background-color: transparent;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    width: 100%;
-    height: 45%;
-    color: #fb7d07;
-    border-radius: 10px;
+nav {
+  background-color: transparent;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 100%;
+  height: 45%;
+  color: #fb7d07;
+  border-radius: 10px;
 }
 
 nav ul {
-    list-style-type:none;
-    padding: 10px;
-    margin: 10px;
-    width: 100%;
+  list-style-type: none;
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
 }
 nav ul li {
-    display: inline;
-    
+  display: inline;
 }
 nav ul li a {
-    text-decoration: none;
-    color: #fb7d07;
-    padding: 15px;
-    display: inline-block;
-    text-align: center;
-    font-size: 2.1em;
-    text-decoration: underline;
-    
-
-    
+  text-decoration: none;
+  color: #fb7d07;
+  padding: 15px;
+  display: inline-block;
+  text-align: center;
+  font-size: 2.1em;
+  text-decoration: underline;
 }
 
 nav ul li a:hover {
-    background-color: burlywood;
-    color: green;
-    border-radius: 10px;
+  background-color: burlywood;
+  color: green;
+  border-radius: 10px;
 }
 
-@media only screen and  (max-width:1200px) {
-    nav ul li a{
-        font-size: 1.6em;
-        display: inline;
-        justify-content: space-between
-
-    }
-
-}
-    
-@media only screen and  (max-width:770px) {
-    nav ul li a{
-        font-size: 1.3em;
-        display: inline;
-        justify-content: space-between
-
-    }
-
+@media only screen and (max-width: 1200px) {
+  nav ul li a {
+    font-size: 1.6em;
+    display: inline;
+    justify-content: space-between;
+  }
 }
 
-@media only screen and  (max-width:505px) {
-    nav ul li a{
-        font-size: 1.0em;
-        display: inline;
-        margin: .8em;
-    
-        
-    }
-
-    .container{
-        margin-top: 0;
-    }
-
+@media only screen and (max-width: 770px) {
+  nav ul li a {
+    font-size: 1.3em;
+    display: inline;
+    justify-content: space-between;
+  }
 }
 
-@media only screen and  (max-width:189px) {
-    nav ul li a{
-        font-size: .7em;
-        display: inline;
-        justify-content: space-between
+@media only screen and (max-width: 505px) {
+  nav ul li a {
+    font-size: 1em;
+    display: inline;
+    margin: 0.8em;
+  }
 
-    }
+  .container {
+    margin-top: 0;
+  }
+}
+
+
+@media only screen and (max-width: 189px) {
+  nav ul li a {
+    font-size: 0.7em;
+    display: inline;
+    justify-content: space-between;
+  }
+
 
 }
