@@ -108,11 +108,11 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 #     }
 # }
 
-db_url = dj_database_url.config(default=os.environ.get("DATABASE_URL"))
-print(f"Connecting to DB: {db_url}")
+# db_url = dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+print(f"Connecting to DB: {os.environ.get('DATABASE_URL')}")
 
 DATABASES = {
-  'default': db_url
+  'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
 
 # DATABASE_URL = os.getenv("DATABASE_URL")
