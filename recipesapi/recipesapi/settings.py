@@ -16,7 +16,7 @@ import os
 #from django.conf.global_settings import STATICFILES_STORAGE
 # from whitenoise import WhiteNoise
 # from decouple import config
-# import dj_database_url
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -98,22 +98,22 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'OPTIONS': {
-            'timeout': 20,  # Set a longer timeout for database locks
-        },
-    }
-}
-
-# db_url = dj_database_url.config()
-# print(f"Connecting to DB: {db_url}")
-
 # DATABASES = {
-#     'default': db_url
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'OPTIONS': {
+#             'timeout': 20,  
+#         },
+#     }
 # }
+
+db_url = dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+print(f"Connecting to DB: {db_url}")
+
+DATABASES = {
+  'default': db_url
+}
 
 # DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -221,6 +221,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",  # if using simple HTML
     "http://localhost:8000",  # Or wherever your frontend runs locally
     "http://localhost:3001",
+    "https://powercoders-web.onrender.com"
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
