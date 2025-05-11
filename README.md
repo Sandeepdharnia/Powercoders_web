@@ -18,7 +18,6 @@ The application supports user authentication and recipe management through a cle
 
 ### Frontend
 - **React**: For building the user interface
-- Axios: For API communication
 
 ### Backend
 - **Django**: Backend web framework
@@ -44,9 +43,13 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
+
+
 
 ## Project Structure 
 
+```
 Powercoders_web/
 ├── frontend/
 ├── recipesapi
@@ -59,19 +62,35 @@ Powercoders_web/
 ├── docker-compose.yml
 ├── Dockerfile
 ├── .env
+```
 
-##📝 License
+📝 License
 This project is open source and available under the MIT License.
 
 
-##👨‍💻 Author
+👨‍💻 Author
+
 Made with ❤️ by Sandeep Dharnia.
+
 Feel free to connect or contribute!
 
+```
 
+
+
+
+
+
+
+
+
+
+
+```
 ### 🐳 **Docker / Docker Compose Commands**
 
 #### Start your full stack
+
 
 ```bash
 docker-compose up --build
@@ -143,3 +162,4 @@ python manage.py runserver
   - Volumes for persistence
 
 ---
+```
