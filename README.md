@@ -1,6 +1,73 @@
 # Powercoders_web
 
----
+# 🍽️ Recipe Sharing Web Application
+
+This is a full-stack recipe sharing web application where users can register, log in, 
+and upload their favorite recipes. Users must be authenticated to submit new recipes. 
+The application supports user authentication and recipe management through a clean and responsive interface.
+
+## 🚀 Features
+
+- User registration and authentication (login/logout)
+- Upload and share recipes (authentication required)
+- View recipes posted by others
+- Responsive frontend UI
+- Backend API for recipe and user management
+
+## 🧰 Tech Stack
+
+### Frontend
+- **React**: For building the user interface
+- Axios: For API communication
+
+### Backend
+- **Django**: Backend web framework
+- **Django REST Framework**: For building RESTful APIs
+
+### Database
+- **SQLite**: Used during local development
+- **PostgreSQL on Render**: Used for deployment
+
+## ⚙️ Installation
+
+### Prerequisites
+- Node.js
+- Python 3.10
+- pip / virtualenv
+- PostgreSQL (optional for local testing)
+
+### Backend Setup
+```bash
+cd backend
+python -m venv env
+source env/bin/activate  # On Windows: env\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+
+## Project Structure 
+
+Powercoders_web/
+├── frontend/
+├── recipesapi
+	├── recipesapi
+	├── manage.py
+	├── db.sqlite3
+	├── requirements.txt
+	├── api2
+	├── frontend “this is copy of build folder”
+├── docker-compose.yml
+├── Dockerfile
+├── .env
+
+##📝 License
+This project is open source and available under the MIT License.
+
+
+##👨‍💻 Author
+Made with ❤️ by Sandeep Dharnia.
+Feel free to connect or contribute!
+
 
 ### 🐳 **Docker / Docker Compose Commands**
 
