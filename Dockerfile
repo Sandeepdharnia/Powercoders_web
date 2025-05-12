@@ -77,6 +77,7 @@ COPY recipesapi/frontend/ ./recipesapi/frontend/
 # Copy built frontend
 # COPY recipesapi/frontend /app/recipesapi/frontend
 
+RUN python manage.py migrate
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
