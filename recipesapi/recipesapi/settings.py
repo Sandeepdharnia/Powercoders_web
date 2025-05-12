@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x$z-j3a)gc(dp%a_-vkzv&bfk47)7rp^w5@46@qlq_(zigz@&g'
 
-SECRET_KEY = dj_database_url.config('SECRET_KEY')
-DEBUG = dj_database_url.config('DEBUG', default=False, cast=bool)
+# SECRET_KEY = dj_database_url.config('SECRET_KEY')
+# DEBUG = dj_database_url.config('DEBUG', default=False, cast=bool)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
