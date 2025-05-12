@@ -78,7 +78,7 @@ COPY recipesapi/frontend/ ./recipesapi/frontend/
 # COPY recipesapi/frontend /app/recipesapi/frontend
 
 # RUN python manage.py migrate
-ENV DATABASE_URL="${DATABASE_URL}"
+# ENV DATABASE_URL="${DATABASE_URL}"
 RUN python manage.py migrate --settings=recipesapi.settings --database=default
 # Collect static files
 RUN python manage.py collectstatic --noinput
