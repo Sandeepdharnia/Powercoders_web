@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x$z-j3a)gc(dp%a_-vkzv&bfk47)7rp^w5@46@qlq_(zigz@&g'
 
-# SECRET_KEY = config('SECRET_KEY')
-# DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = dj_database_url.config('SECRET_KEY')
+DEBUG = dj_database_url.config('DEBUG', default=False, cast=bool)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -221,13 +221,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://127.0.0.1:5500',  # Frontend origin
-# ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://cookinglovepassion.netlify.app",
-# ]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:5500",  # if using simple HTML
@@ -242,7 +236,6 @@ CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Only for testing
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:5500',
-    #'http://127.0.0.1:5500/contact/your_recipe.html',
     'http://127.0.0.1:8000',
     'http://localhost:3000',
     "http://localhost:3001",
