@@ -52,3 +52,5 @@ wrapt==1.17.2
 gunicorn
 
 uvicorn==0.34.2
+
+python-dotenv==1.1.0
