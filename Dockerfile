@@ -62,6 +62,7 @@ RUN pip install --upgrade pip setuptools wheel cython
 # Install backend requirements
 COPY ./recipesapi/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade dj-database-url
 
 
 COPY recipesapi/recipesapi/ .
