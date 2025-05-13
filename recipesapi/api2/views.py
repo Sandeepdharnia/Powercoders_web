@@ -95,7 +95,7 @@ class RegisterViewSet(CreateAPIView):
                 status=status.HTTP_201_CREATED
             )
         except ValidationError as e:
-            print("Validation Error:", e.detail)
+            print("Validation Error:", e)
             #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
