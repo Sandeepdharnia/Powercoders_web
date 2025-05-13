@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: powercoders_web
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn recipesapi.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: recipesapi.deployment_settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: recipes_db_14
+          property: connectionString
+
+databases:
+  - name: recipes_db_14
+    plan: free
