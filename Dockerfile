@@ -130,8 +130,8 @@ COPY recipesapi/frontend/ ./recipesapi/frontend/
 
 WORKDIR /app/recipesapi  # Set working directory to where manage.py is
 
-RUN python manage.py migrate --settings=recipesapi.settings --database=default
-RUN python manage.py collectstatic --noinput
+RUN cd /app/recipesapi && python manage.py migrate --settings=recipesapi.settings --database=default
+RUN cd /app/recipesapi && python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
