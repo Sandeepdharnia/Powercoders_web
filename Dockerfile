@@ -43,7 +43,7 @@ FROM python:3.10-slim
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /app
+# WORKDIR /app
 
 # Install system and build dependencies
 RUN apt-get update && \
@@ -79,6 +79,7 @@ COPY recipesapi/frontend/ ./recipesapi/frontend/
 
 # RUN python manage.py migrate
 # ENV DATABASE_URL="${DATABASE_URL}"
+WORKDIR /app
 RUN python manage.py migrate --settings=recipesapi.settings --database=default
 # Collect static files
 RUN python manage.py collectstatic --noinput
