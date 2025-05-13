@@ -6,14 +6,14 @@ from .settings import*
 from .settings import BASE_DIR
 
 
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')]
+SECRET_KEY = os.environ.get('SECRET_KEY', '840a9e3c35e0a376418ca72d19568342')
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''), 'powercoders-web.onrender.com', '*']
 
-
-CSRF_TRUSTED_ORIGINS = ['https://'+os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')]
 
 DEBUG = False
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -36,10 +36,24 @@ STORAGES = {
 
  
 
-DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ['DATABASE_URL'], 
-            conn_max_age=600)
-    }
+# DATABASES = {
+#         'default': dj_database_url.config(
+#             default=os.environ['DATABASE_URL'], 
+#             conn_max_age=600)
+#     }
 
-    
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600
+        )
+    }
+else:
+    # Fallback for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }    
