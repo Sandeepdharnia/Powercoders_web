@@ -125,7 +125,7 @@ COPY ./recipesapi/ /app/recipesapi/
 # Set working directory for manage.py commands
 WORKDIR /app/recipesapi
 
-RUN python manage.py migrate --settings=recipesapi.settings --database=default
+RUN python manage.py migrate --settings=recipesapi.settings --database=default "$DATABASE_URL"
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
