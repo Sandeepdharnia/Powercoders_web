@@ -6,12 +6,18 @@ from .settings import*
 from .settings import BASE_DIR
 
 
-SECRET_KEY = os.environ.get('SECRET_KEY', '840a9e3c35e0a376418ca72d19568342')
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''), 'powercoders-web.onrender.com', '*']
-
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')]
 
 DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY', '840a9e3c35e0a376418ca72d19568342')
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''), 
+                 'powercoders-web.onrender.com', '*']
+
+# CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')]
+
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{os.environ.get("RENDER_EXTERNAL_HOSTNAME", "")}',
+    'https://powercoders-web.onrender.com'
+]
 
 
 
@@ -42,18 +48,30 @@ STORAGES = {
 #             conn_max_age=600)
 #     }
 
-if 'DATABASE_URL' in os.environ:
+# Debug database connection
+db_url = os.environ.get('DATABASE_URL')
+print(f"Database URL detected: {'Yes' if db_url else 'No'}")
+
+# Fixed database configuration with better error handling
+if db_url:
+    print(f"Configuring database from DATABASE_URL")
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
-            conn_max_age=600
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True
         )
     }
 else:
-    # Fallback for local development
+    print("WARNING: No DATABASE_URL found. Falling back to SQLite.")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }    
+    }
+
+# Additional settings for better security and performance
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

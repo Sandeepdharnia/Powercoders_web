@@ -77,7 +77,7 @@ COPY recipesapi/frontend/ ./recipesapi/frontend/
 # Copy built frontend
 # COPY recipesapi/frontend /app/recipesapi/frontend
 
-RUN python manage.py migrate
+# RUN python manage.py migrate
 # ENV DATABASE_URL="${DATABASE_URL}"
 # RUN python manage.py migrate --settings=recipesapi.settings --database=default 
 # Collect static files
@@ -91,6 +91,6 @@ EXPOSE 8000
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 # Run app with Gunicorn (better for production)
-#CMD ["gunicorn", "recipesapi.wsgi:application", "--bind", "0.0.0.0:8000"]
-CMD ["sh", "-c", "python manage.py migrate && gunicorn recipesapi.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["gunicorn", "recipesapi.wsgi:application", "--bind", "0.0.0.0:8000"]
+# CMD ["sh", "-c", "python manage.py migrate && gunicorn recipesapi.wsgi:application --bind 0.0.0.0:8000"]
 # CMD ["sh", "-c", "python manage.py migrate"]
