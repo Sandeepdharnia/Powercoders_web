@@ -97,7 +97,6 @@
 # # CMD ["sh", "-c", "python manage.py migrate"]
 
 
-
 FROM python:3.10-slim
 
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -117,22 +116,19 @@ RUN apt-get update && \
 RUN pip install --upgrade pip setuptools wheel cython
 
 # Copy requirements and install dependencies
-COPY ./recipesapi/requirements.txt .
+COPY ./recipesapi/requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire recipesapi directory into /app/
 COPY ./recipesapi/ /app/recipesapi/
 
-# Copy the frontend
-COPY frontend/package*.json ./frontend/
-COPY frontend/ ./frontend/
-COPY recipesapi/frontend/ ./recipesapi/frontend/
+# Set working directory for manage.py commands
+WORKDIR /app/recipesapi
 
-WORKDIR /app/recipesapi  # Set working directory to where manage.py is
-
-RUN cd /app/recipesapi && python manage.py migrate --settings=recipesapi.settings --database=default
-RUN cd /app/recipesapi && python manage.py collectstatic --noinput
+RUN python manage.py migrate --settings=recipesapi.settings --database=default
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python manage.py migrate && gunicorn recipesapi.wsgi:application --bind 0.0.0.0:8000"]
+# Run app with Gunicorn
+CMD ["gunicorn", "recipesapi.wsgi:application", "--bind", "0.0.0.0:8000"]
