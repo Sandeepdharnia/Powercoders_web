@@ -83,28 +83,28 @@ class RegisterViewSet(CreateAPIView):
         print("Request data:", request.data)
         serializer = self.get_serializer(data=request.data)
         print(serializer)
-        try:
-            serializer.is_valid(raise_exception=True)
-            user = serializer.save()
-            token, _ = Token.objects.get_or_create(user=user)
-            return Response(
-                {
-                    "message": "Registration successful!",
-                    "token": token.key
-                },
-                status=status.HTTP_201_CREATED
-            )
-        except ValidationError as e:
-            print("Validation Error:", e)
-            #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
-        except Exception as e:
-            print("Validation Error:", serializer.errors)
-            logger.error("Registration failed:\n%s", traceback.format_exc())
-            return Response(
-                {"error": "Internal Server Error", "details": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+        #try:
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response(
+            {
+                "message": "Registration successful!",
+                "token": token.key
+            },
+            status=status.HTTP_201_CREATED
+        )
+        # except ValidationError as e:
+        #     print("Validation Error:", e)
+        #     #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        #     return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
+        # except Exception as e:
+        #     print("Validation Error:", serializer.errors)
+        #     logger.error("Registration failed:\n%s", traceback.format_exc())
+        #     return Response(
+        #         {"error": "Internal Server Error", "details": str(e)},
+        #         status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        #     )
 # Create a view for user login
 
 
