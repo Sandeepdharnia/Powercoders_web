@@ -98,34 +98,34 @@ WSGI_APPLICATION = 'recipesapi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        'OPTIONS': {
-            'timeout': 20,  
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'OPTIONS': {
+#             'timeout': 20,  
+#         },
+#     }
+# }
 
 # # db_url = dj_database_url.config(default=os.environ.get("DATABASE_URL"))
-# print(f"Connecting to DB: {os.environ.get('DATABASE_URL')}")
-# DATABASE_URL = os.environ.get("DATABASE_URL")
+print(f"Connecting to DB: {os.environ.get('DATABASE_URL')}")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
  
-# if DATABASE_URL:
-#     print(f"Connecting to DB: {DATABASE_URL}")
-#     DATABASES = {
-#         'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-#     }
-# else:
-#     print("No DATABASE_URL found. Line from settings.py.")
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
+if DATABASE_URL:
+    print(f"Connecting to DB: {DATABASE_URL}")
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    }
+else:
+    print("No DATABASE_URL found. Line from settings.py.")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # DATABASE_URL = os.getenv("DATABASE_URL")
 
