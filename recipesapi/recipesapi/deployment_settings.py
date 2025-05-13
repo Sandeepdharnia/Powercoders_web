@@ -57,6 +57,7 @@ if db_url:
     print(f"Configuring database from DATABASE_URL")
     DATABASES = {
         'default': dj_database_url.config(
+            db_url,
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True
