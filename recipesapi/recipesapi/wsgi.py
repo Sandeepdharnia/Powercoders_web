@@ -11,6 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+print("Database URL from wsgi.py:", os.environ.get('DATABASE_URL'))
 
 settings_module = 'recipesapi.deployment_settings' if 'RENDER_EXTERNAL_HOSTNAME' in os.environ else 'recipesapi.settings'
 
