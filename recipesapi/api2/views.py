@@ -14,6 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api2.models import Recipe, CustomUser, ReportRecipe
 from api2.serializers import  RecipeSerializer, RegisterSerializer, ReportRecipeSerializer, ContactMessageSerializer
+from rest_framework.exceptions import ValidationError
      
 User = get_user_model()  # ✅ Get the custom user model (Register)
 
