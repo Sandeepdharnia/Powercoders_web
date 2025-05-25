@@ -56,15 +56,21 @@ print(f"Database URL detected: {'Yes' if db_url else 'No'}")
 if db_url:
     print(f"Configuring database from DATABASE_URL")
     DATABASES = {
-        'default': dj_database_url.config(
-            db_url,
-            print(db_url),
-            print('Databased is connected'),
-            conn_max_age=6000,
-            conn_health_checks=True,
-            ssl_require=True,
-        )
-    }
+         'default': dj_database_url.config(
+             default=os.environ['DATABASE_URL'], 
+             conn_max_age=600)
+     }
+    
+    # DATABASES = {
+    #     'default': dj_database_url.config(
+    #         db_url,
+    #         print(db_url),
+    #         print('Databased is connected'),
+    #         conn_max_age=6000,
+    #         conn_health_checks=True,
+    #         ssl_require=True,
+    #     )
+    # }
 else:
     print("WARNING: No DATABASE_URL found. Falling back to SQLite.")
     DATABASES = {
