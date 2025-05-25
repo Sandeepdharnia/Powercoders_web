@@ -30,12 +30,12 @@ echo "Installing Python dependencies..."
 pip install -r recipesapi/requirements.txt
 
 # Apply database migrations
-echo "Applying database migrations..."
-python manage.py makemigrations --settings=recipesapi.deployment_settings
-python manage.py migrate --settings=recipesapi.deployment_settings --noinput
+# echo "Applying database migrations..."
+# python manage.py makemigrations --settings=recipesapi.deployment_settings
+# python manage.py migrate --settings=recipesapi.deployment_settings --noinput
 
-# Collect static files
-echo "Collecting static files..."
-python manage.py collectstatic --noinput --settings=recipesapi.deployment_settings
+# # Collect static files
+# echo "Collecting static files..."
+# python manage.py collectstatic --noinput --settings=recipesapi.deployment_settings
 
 echo "Build script completed successfully!"
