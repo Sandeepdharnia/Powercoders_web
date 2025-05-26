@@ -52,7 +52,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./recipesapi/recipesapi:/app
+      # - ./recipesapi/recipesapi:/app
+      - .:/app
+      # - ./recipesapi:/app
     ports:
       - "8000:8000"
     env_file:
