@@ -120,13 +120,15 @@ RUN apt-get update && \
 RUN pip install --upgrade pip setuptools wheel cython dj-database-url
 
 # Copy requirements and install
-COPY ./recipesapi/requirements.txt .
+COPY ./requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
-COPY recipesapi/recipesapi/ /app/recipesapi/
-COPY recipesapi/manage.py /app/
-COPY recipesapi/frontend/ /app/recipesapi/frontend/  
+# COPY recipesapi/recipesapi/ /app/recipesapi/
+# COPY recipesapi/api2/ /app/recipesapi/
+COPY manage.py /app/
+# COPY manage.py /app/recipesapi/
+# COPY recipesapi/frontend/ /app/frontend/  
 # optional for built frontend
 
 # Optional: copy frontend React/Vite/Vue app for build (you can build in CI instead)
