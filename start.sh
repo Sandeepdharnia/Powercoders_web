@@ -8,7 +8,8 @@ cd /app
 # It might already be picked up by 'cd /app', but being explicit is safer.
 # Using 'export PYTHONPATH=.' or 'export PYTHONPATH=$(pwd)' if you want it dynamic.
 # Or just keep 'export PYTHONPATH=/app/' as it is, as it's correctly hardcoded.
-export PYTHONPATH=/app/
+#export PYTHONPATH=/app/
+export PYTHONPATH=.:$PYTHONPATH
 
 echo "Running migrations..."
 python manage.py migrate --noinput --settings=recipesapi.deployment_settings

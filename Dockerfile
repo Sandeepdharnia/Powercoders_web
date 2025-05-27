@@ -126,6 +126,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code
 COPY recipesapi /app/recipesapi/
 # COPY recipesapi/api2/ /app/recipesapi/
+COPY api2 /app/api2/ 
 COPY manage.py /app/
 # COPY manage.py /app/recipesapi/
 # COPY recipesapi/frontend/ /app/frontend/  
