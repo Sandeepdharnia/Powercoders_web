@@ -23,11 +23,13 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 CORS_ALLOWED_ORIGINS = [
+   "https://cookinglovepassion.netlify.app",
     "http://localhost:3000",
     "http://127.0.0.1:5500",  # if using simple HTML
     "http://localhost:8000",  # Or wherever your frontend runs locally
     "http://localhost:3001",
-    "https://powercoders-web.onrender.com"
+    # "https://powercoders-web.onrender.com",
+ 
 ]
 
 STORAGES = {
